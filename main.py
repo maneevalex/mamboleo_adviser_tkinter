@@ -1,57 +1,68 @@
-from tkinter import *
+import tkinter as tk
 import sqlite3
+from datetime import datetime
+
+class Root(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        #Creating main window Labels
+
+        self.name_lbl = tk.Label(self, text='Продажа абонементов', bg='lightgrey', fg='black',
+                                 font=('Verdana', 14), width=66)
+        self.name_lbl.grid(row=0, column=0, columnspan=4, ipady=10)
+        self.name_lbl = tk.Label(self, text='Имя', fg='black', font=('Verdana', 14))
+        self.name_lbl.grid(row=1, column=0, ipady=10, sticky=tk.W)
+        self.name_lbl = tk.Label(self, text='Количество занятий', fg='black', font=('Verdana', 14))
+        self.name_lbl.grid(row=2, column=0, ipady=10, sticky=tk.W)
+        self.name_lbl = tk.Label(self, text='Стоимость', fg='black', font=('Verdana', 14))
+        self.name_lbl.grid(row=3, column=0, ipady=10, sticky=tk.W)
+
+        #Creating main window Buttons
+        self.btn = tk.Button(self, text="Add to Database", command=self.submit, width=15, relief=tk.RAISED)
+        self.btn.grid(row=3, column=3, sticky=tk.E, pady=10, ipady=7)
+        self.btn = tk.Button(self, text="Close App", command=self.close_app, width=15, relief=tk.RAISED)
+        self.btn.grid(row=4, column=3, sticky=tk.SE, pady=200, ipady=7)
+
+        #Creating main window Entries
+        self.entry = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry.grid(row=1, column=1, columnspan=2, sticky=tk.W, ipady=8)
+        self.entry1 = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry1.grid(row=2, column=1, columnspan=2, sticky=tk.W, ipady=8)
+        self.entry2 = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry2.grid(row=3, column=1, columnspan=2, sticky=tk.W, ipady=8)
 
 
-root = Tk()
-root.geometry('800x600')
-main_font = ('Monotype Corsiva', 18)
+    def close_app(self):
+        self.destroy()
 
-def submit():
-    #Connect DataBase
-    conn = sqlite3.connect('subscription.db')
-    c = conn.cursor()
+    def submit(self):
+        #Add to Database
+        conn = sqlite3.connect('subscription.db')
+        c = conn.cursor()
 
-    c.execute("INSERT INTO subscription VALUES(:name, :lesson, :money)",
-              {
-                  'name':name_entry.get(),
-                  'lesson': lesson_entry.get(),
-                  'money': money_entry.get()
-              })
-
-    conn.commit()
-    c.close()
-
-    name_entry.delete(0, END)
-    lesson_entry.delete(0, END)
-    money_entry.delete(0, END)
+        c.execute("INSERT INTO subscription VALUES(:date, :name, :lessons, :cost)",
+                {
+                    "date": datetime.now().strftime("%B-%d %Y, %H:%m"),
+                    "name": self.entry.get(),
+                    "lessons": self.entry1.get(),
+                    "cost": self.entry2.get(),
+                })
 
 
-main_win_lbl = Label(root, text='Продажа абонементов', font=('Verdana', 20))
-main_win_lbl.grid(row=0, column=1)
+        conn.commit()
+        #Clear Entries
+        self.entry.delete(0, tk.END)
+        self.entry1.delete(0, tk.END)
+        self.entry2.delete(0, tk.END)
 
-name_entry = Entry(root, width=30, font=main_font, borderwidth=2)
-name_entry.grid(row=1, column=1, padx=10, pady=2, ipady=5, columnspan=2)
-name_lbl = Label(root, font=main_font, text="Имя")
-name_lbl.grid(row=1, column=0)
+        #Close connection
+        c.close()
+        conn.close()
 
-lesson_entry = Entry(root, width=30, font=main_font, borderwidth=2)
-lesson_entry.grid(row=2, column=1, padx=10, pady=2, ipady=5, columnspan=2)
-lesson_lbl = Label(root, font=main_font, text="Количество занятий")
-lesson_lbl.grid(row=2, column=0)
-
-money_entry = Entry(root, width=30, font=main_font, borderwidth=2)
-money_entry.grid(row=3, column=1, padx=10, pady=2, ipady=5, columnspan=2)
-name_lbl = Label(root, font=main_font, text="Стоимость")
-name_lbl.grid(row=3, column=0)
-
-submit_btn = Button(root, text='Сделать Запись', command=submit)
-submit_btn.grid(row=4, column=1, ipady=2, pady=4, sticky=E)
-
-
-root.mainloop()
-
-conn = sqlite3.connect('subscription.db')
-c = conn.cursor()
-conn.commit()
-c.close()
-conn.close()
+if __name__ == "__main__":
+    root = Root()
+    root.title('Mamboleo Adviser')
+    root.geometry('800x600')
+    root.resizable(False, False)
+    root.mainloop()
