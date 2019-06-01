@@ -25,11 +25,11 @@ class Root(tk.Tk):
         self.btn.grid(row=4, column=3, sticky=tk.SE, pady=200, ipady=7)
 
         #Creating main window Entries
-        self.entry = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry = tk.Entry(self, width=50, font=('Monotype Corsiva', 14))
         self.entry.grid(row=1, column=1, columnspan=2, sticky=tk.W, ipady=8)
-        self.entry1 = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry1 = tk.Entry(self, width=50, font=('Monotype Corsiva', 14))
         self.entry1.grid(row=2, column=1, columnspan=2, sticky=tk.W, ipady=8)
-        self.entry2 = tk.Entry(self, width=50, font=('Times New Roman', 14))
+        self.entry2 = tk.Entry(self, width=50, font=('Monotype Corsiva', 14))
         self.entry2.grid(row=3, column=1, columnspan=2, sticky=tk.W, ipady=8)
 
 
