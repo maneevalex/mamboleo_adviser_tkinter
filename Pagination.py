@@ -6,11 +6,18 @@ class Casino_Adv(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
 
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+
         members = []
         conn = sqlite3.connect('mamboleo_adviser.db')
         c = conn.cursor()
 
-        c.execute("SELECT name FROM students")
+        c.execute("SELECT name FROM students WHERE casino_adv=1")
         rows = c.fetchall()
         for row in rows:
             members.append(row)
@@ -19,11 +26,11 @@ class Casino_Adv(tk.Toplevel):
         conn.close()
 
 
-        self.list_box = tk.Listbox(self, selectmode=tk.MULTIPLE)
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
         self.list_box.insert(0, *members)
-        self.list_box.pack()
-        btn = tk.Button(self, text='Записать', command=self.add_data)
-        btn.pack()
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -32,6 +39,302 @@ class Casino_Adv(tk.Toplevel):
         for item in clicked:
         
             c.execute("INSERT INTO casino_adv VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+
+class Rumba(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE rumba=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO rumba VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+
+class NY_New(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE ny_new=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO ny_new VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+class Bachata_Int(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE bachata_int=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO bachata_int VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+class Casino_Int(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE casino_int=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO casino_int VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+class Bachata_New(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE bachata_new=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO bachata_new VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+class Female_Style(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE female_style=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO female_style VALUES(:name, :date)",
+                      {
+                          'name': ('').join(self.list_box.get(item)),
+                          'date': datetime.now().strftime("%B-%d %Y")
+                      })
+            conn.commit()
+        c.close()
+        conn.close()
+
+class NY_Int(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        main_frame = tk.Frame(self)
+        main_frame.pack(fill='both', expand=True)
+
+        left_frame = tk.Frame(main_frame, height=100, width=100)
+        left_frame.pack(side=tk.LEFT)
+
+        members = []
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+
+        c.execute("SELECT name FROM students WHERE ny_int=1")
+        rows = c.fetchall()
+        for row in rows:
+            members.append(row)
+        conn.commit()
+        c.close()
+        conn.close()
+
+        self.list_box = tk.Listbox(left_frame, selectmode=tk.MULTIPLE, height=30)
+        self.list_box.insert(0, *members)
+        self.list_box.grid(row=0, column=0)
+        btn = tk.Button(left_frame, text='Записать', command=self.add_data)
+        btn.grid(row=0, column=2)
+
+    def add_data(self):
+        conn = sqlite3.connect('mamboleo_adviser.db')
+        c = conn.cursor()
+        clicked = self.list_box.curselection()
+        for item in clicked:
+            c.execute("INSERT INTO ny_int VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
                           'date': datetime.now().strftime("%B-%d %Y")
@@ -382,48 +685,35 @@ class Schedule(tk.Frame):
         label = tk.Label(manhattan_frame, text="Воскресенье", width=12, font="arial 16")
         label.grid(row=6, column=0, pady=15)
 
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Casino Adv // 18-30', command=self.open_casino)
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Casino Adv // 18-30', command=self.open_casino_adv)
         shedule_btn.grid(row=0, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Beg // 19-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Beg // 19-30', command=self.open_ny_new)
         shedule_btn.grid(row=0, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Rumba')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Rumba', command=self.open_rumba)
         shedule_btn.grid(row=0, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Int // 18-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Int // 18-30', command=self.open_bachata_int)
         shedule_btn.grid(row=1, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Salsa Int // 19-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Salsa Int // 19-30', command=self.open_casino_int)
         shedule_btn.grid(row=1, column=2, padx=15)
-        shedule_btn= tk.Button(manhattan_frame, width=17, text='Bachata Beg // 20-30')
+        shedule_btn= tk.Button(manhattan_frame, width=17, text='Bachata Beg // 20-30', command=self.open_bachta_new)
         shedule_btn.grid(row=1, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Casino Adv // 18-30', command=self.open_casino)
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Casino Adv // 18-30', command=self.open_casino_adv)
         shedule_btn.grid(row=2, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Beg // 19-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Beg // 19-30', command=self.open_ny_new)
         shedule_btn.grid(row=2, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Female Style')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Female Style', command=self.open_female_style)
         shedule_btn.grid(row=2, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Int // 18-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Int // 18-30', command=self.open_bachata_int)
         shedule_btn.grid(row=3, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Salsa Int // 19-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Salsa Int // 19-30', command=self.open_casino_int)
         shedule_btn.grid(row=3, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Beg // 20-30')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='Bachata Beg // 20-30', command=self.open_bachta_new)
         shedule_btn.grid(row=3, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Int // 18-30', command=self.open_ny_int)
         shedule_btn.grid(row=4, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(manhattan_frame, width=17, text='NY Int // 18-30', command=self.open_ny_int)
         shedule_btn.grid(row=4, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=4, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=3, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=6, column=1, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=6, column=2, padx=15)
-        shedule_btn = tk.Button(manhattan_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=6, column=3, padx=15)
+
 
         #================================= Malecon Frame =========================
 
@@ -445,57 +735,83 @@ class Schedule(tk.Frame):
         label = tk.Label(malecon_frame, text="Воскресенье", width=12, font="arial 16")
         label.grid(row=6, column=0, pady=15)
 
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Salsa Beg // 18-30')
         shedule_btn.grid(row=0, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Bachata Int // 19-30')
         shedule_btn.grid(row=0, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Stretching // 20-30')
         shedule_btn.grid(row=0, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Salsa Beg // 18-30')
         shedule_btn.grid(row=1, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='NY Adv // 19-30')
         shedule_btn.grid(row=1, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=1, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Salsa Beg // 18-30')
         shedule_btn.grid(row=2, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Bachata Int // 19-30')
         shedule_btn.grid(row=2, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Stretching // 20-30')
         shedule_btn.grid(row=2, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Salsa Beg // 18-30')
         shedule_btn.grid(row=3, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='NY Adv // 19-30')
         shedule_btn.grid(row=3, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=3, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Bachata Style // 18-00')
         shedule_btn.grid(row=4, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Rueda // 19-00')
         shedule_btn.grid(row=4, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=4, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=5, column=3, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Afro // 12-00')
         shedule_btn.grid(row=6, column=1, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
+        shedule_btn = tk.Button(malecon_frame, width=17, text='Rueda // 13-00')
         shedule_btn.grid(row=6, column=2, padx=15)
-        shedule_btn = tk.Button(malecon_frame, width=17, text='Тут занятие')
-        shedule_btn.grid(row=6, column=3, padx=15)
 
 
-    def open_casino(self):
+    def open_casino_adv(self):
         casino_adv = Casino_Adv(self)
         casino_adv.grab_set()
         casino_adv.geometry('800x600')
         casino_adv.title('Casino Advanced 18-30')
 
+    def open_ny_new(self):
+        ny_new = NY_New(self)
+        ny_new.grab_set()
+        ny_new.geometry('800x600')
+        ny_new.title('SalsaOn2 Begginers 19-30')
 
+    def open_rumba(self):
+        rumba = Rumba(self)
+        rumba.grab_set()
+        rumba.geometry('800x600')
+        rumba.title('Rumba 20-30')
+
+    def open_bachata_int(self):
+        bachata_int = Bachata_Int(self)
+        bachata_int.grab_set()
+        bachata_int.geometry('800x600')
+        bachata_int.title('Rumba 20-30')
+
+    def open_casino_int(self):
+        casino_int = Casino_Int(self)
+        casino_int.grab_set()
+        casino_int.geometry('800x600')
+        casino_int.title('Casino Intermediate 19-30')
+
+    def open_bachta_new(self):
+        bachta_new = Bachata_New(self)
+        bachta_new.grab_set()
+        bachta_new.geometry('800x600')
+        bachta_new.title('Bachata Begginers 20-30')
+
+    def open_female_style(self):
+        female_style = Female_Style(self)
+        female_style.grab_set()
+        female_style.geometry('800x600')
+        female_style.title('Female Style 20-30')
+
+    def open_ny_int(self):
+        ny_int = NY_Int(self)
+        ny_int.grab_set()
+        ny_int.geometry('800x600')
+        ny_int.title('SalsaOn2 Intermediate 20-30')
 
 if __name__ == "__main__":
     root = Main()
