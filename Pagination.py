@@ -756,6 +756,8 @@ class PassRetailer(tk.Frame):
         self.name_label.grid(row=1, column=0, sticky=tk.NW, pady=12)
         self.name_label = tk.Label(main_frame, text='Стоимость', font=('Verdana', 25))
         self.name_label.grid(row=2, column=0, sticky=tk.NW, pady=12)
+        self.name_label = tk.Label(main_frame, text='Дата', font=('Verdana', 25))
+        self.name_label.grid(row=3, column=0, sticky=tk.NW, pady=12)
 
         self.name_entry = tk.Entry(main_frame, width=32, font=('Times New Roman', 20))
         self.name_entry.grid(row=0, column=1, padx=40, pady=12)
@@ -763,6 +765,8 @@ class PassRetailer(tk.Frame):
         self.type_entry.grid(row=1, column=1, padx=40, pady=12)
         self.cost_entry = tk.Entry(main_frame, width=32, font=('Times New Roman', 20))
         self.cost_entry.grid(row=2, column=1, padx=40, pady=12)
+        self.date_entry = tk.Entry(main_frame, width=32, font=('Times New Roman', 20))
+        self.date_entry.grid(row=3, column=1, padx=40, pady=12)
 
         #=========================   Info Frame   =======================
 
@@ -776,6 +780,7 @@ class PassRetailer(tk.Frame):
             self.name_entry.delete(0, tk.END)
             self.type_entry.delete(0, tk.END)
             self.cost_entry.delete(0, tk.END)
+            self.date_entry.delete(0, tk.END)
 
     def submit_data(self):
         # Add to Database
@@ -784,7 +789,7 @@ class PassRetailer(tk.Frame):
 
         c.execute("INSERT INTO subscription VALUES(:date, :name, :lessons, :cost)",
                   {
-                      "date": datetime.now().strftime("%B-%d %Y"),
+                      "date": self.date_entry.get(),
                       "name": self.name_entry.get(),
                       "lessons": self.type_entry.get(),
                       "cost": self.cost_entry.get(),
@@ -795,6 +800,7 @@ class PassRetailer(tk.Frame):
         self.name_entry.delete(0, tk.END)
         self.type_entry.delete(0, tk.END)
         self.cost_entry.delete(0, tk.END)
+
 
         # Close connection
         c.close()
