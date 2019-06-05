@@ -13,6 +13,7 @@ class Casino_Adv(tk.Toplevel):
         left_frame.pack(side=tk.LEFT)
 
 
+
         members = []
         conn = sqlite3.connect('mamboleo_adviser.db')
         c = conn.cursor()
@@ -31,6 +32,9 @@ class Casino_Adv(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -41,7 +45,7 @@ class Casino_Adv(tk.Toplevel):
             c.execute("INSERT INTO casino_adv VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
@@ -75,6 +79,9 @@ class Rueda(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -84,11 +91,12 @@ class Rueda(tk.Toplevel):
             c.execute("INSERT INTO rueda VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Rumba(tk.Toplevel):
     def __init__(self, parent):
@@ -117,6 +125,9 @@ class Rumba(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -126,11 +137,12 @@ class Rumba(tk.Toplevel):
             c.execute("INSERT INTO rumba VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class NY_Adv(tk.Toplevel):
     def __init__(self, parent):
@@ -159,6 +171,9 @@ class NY_Adv(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -168,7 +183,7 @@ class NY_Adv(tk.Toplevel):
             c.execute("INSERT INTO ny_adv VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
@@ -202,16 +217,19 @@ class Casino_New(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
         c = conn.cursor()
         clicked = self.list_box.curselection()
         for item in clicked:
-            c.execute("INSERT INTO rumba VALUES(:name, :date)",
+            c.execute("INSERT INTO casino_new VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
@@ -245,6 +263,9 @@ class NY_New(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -254,11 +275,12 @@ class NY_New(tk.Toplevel):
             c.execute("INSERT INTO ny_new VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Bachata_Int(tk.Toplevel):
     def __init__(self, parent):
@@ -287,6 +309,9 @@ class Bachata_Int(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -296,11 +321,12 @@ class Bachata_Int(tk.Toplevel):
             c.execute("INSERT INTO bachata_int VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Casino_Int(tk.Toplevel):
     def __init__(self, parent):
@@ -329,6 +355,9 @@ class Casino_Int(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -338,11 +367,12 @@ class Casino_Int(tk.Toplevel):
             c.execute("INSERT INTO casino_int VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Bachata_New(tk.Toplevel):
     def __init__(self, parent):
@@ -358,7 +388,7 @@ class Bachata_New(tk.Toplevel):
         conn = sqlite3.connect('mamboleo_adviser.db')
         c = conn.cursor()
 
-        c.execute("SELECT name FROM students WHERE bachata_new=1")
+        c.execute("SELECT name FROM students WHERE bachata_int=1")
         rows = c.fetchall()
         for row in rows:
             members.append(row)
@@ -371,20 +401,24 @@ class Bachata_New(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
         c = conn.cursor()
         clicked = self.list_box.curselection()
         for item in clicked:
-            c.execute("INSERT INTO bachata_new VALUES(:name, :date)",
+            c.execute("INSERT INTO bachata_int VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Female_Style(tk.Toplevel):
     def __init__(self, parent):
@@ -413,6 +447,9 @@ class Female_Style(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -422,11 +459,12 @@ class Female_Style(tk.Toplevel):
             c.execute("INSERT INTO female_style VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class NY_Int(tk.Toplevel):
     def __init__(self, parent):
@@ -455,6 +493,9 @@ class NY_Int(tk.Toplevel):
         self.list_box.grid(row=0, column=0)
         btn = tk.Button(left_frame, text='Записать', command=self.add_data)
         btn.grid(row=0, column=2)
+        self.date_label = tk.Label(left_frame, text='Дата Занятия')
+        self.date_entry = tk.Entry(left_frame, width=12, font=('Times New Roman', 20))
+        self.date_entry.grid(row=0, column=3, padx=40, pady=12)
 
     def add_data(self):
         conn = sqlite3.connect('mamboleo_adviser.db')
@@ -464,11 +505,12 @@ class NY_Int(tk.Toplevel):
             c.execute("INSERT INTO ny_int VALUES(:name, :date)",
                       {
                           'name': ('').join(self.list_box.get(item)),
-                          'date': datetime.now().strftime("%B-%d %Y")
+                          'date': self.date_entry.get()
                       })
             conn.commit()
         c.close()
         conn.close()
+
 
 class Main(tk.Tk):
 
